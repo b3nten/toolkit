@@ -1,0 +1,29 @@
+{
+  "name": "@benstack/toolkit",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "version": "0.0.1",
+  "description": "Library of tools for JavaScript development.",
+  "keywords": [],
+  "author": "Benton Boychuk-Chorney",
+  "license": "MIT",
+  "exports": {
+    "./logger": {
+      "import": "./logger/mod.js"
+    },
+    "./queue": {
+      "import": "./collections/queue.js"
+    },
+    "./stack": {
+      "import": "./collections/stack.js"
+    },
+    "./types": {
+      "import": "./types/index.d.ts"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.11"
+  }
+}
