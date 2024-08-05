@@ -19,8 +19,26 @@
     "./stack": {
       "import": "./collections/stack.js"
     },
+    "./lfucache": {
+      "import": "./collections/LFUCache.js"
+    },
+    "./hashkey": {
+      "import": "./collections/hashKey.js"
+    },
+    "./debounce": {
+      "import": "./scheduling/debounce.js"
+    },
+    "./throttle": {
+      "import": "./scheduling/throttle.js"
+    },
+    "./memo": {
+      "import": "./scheduling/memoize.js"
+    },
+    "./schedule": {
+      "import": "./scheduling/schedule.js"
+    },
     "./types": {
-      "import": "./types/index.d.ts"
+      "types": "./types/index.d.ts"
     }
   },
   "devDependencies": {
