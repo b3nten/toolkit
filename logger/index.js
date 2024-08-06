@@ -221,7 +221,7 @@ function createLogger(name, config = {}) {
 	if(!name) throw new Error("Logger must have a name");
 	const level = config.level ?? Logger.LogLevels.INFO;
 	const color = config.color ?? gradients.orange;
-	const writer = config.writer ?? (isColorSupported ? new FancyConsoleWriter(config.name, color) : new SimpleConsoleWriter(config.name));
+	const writer = config.writer ?? (isColorSupported ? new FancyConsoleWriter(name, color) : new SimpleConsoleWriter(name));
 	return new Logger(level, writer);
 }
 
