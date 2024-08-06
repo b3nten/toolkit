@@ -157,7 +157,7 @@ class Logger {
 	 * @param { LogLevel | number } level
 	 * @param { any[] } input
 	 */
-	log(
+	logImpl(
 		level,
 		input,
 	) {
@@ -170,37 +170,39 @@ class Logger {
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	debug = (...msg) => this.log(Logger.LogLevels.DEBUG, msg);
+	debug = (...msg) => this.logImpl(Logger.LogLevels.DEBUG, msg);
 	/**
 	 * Log a message that provides non critical information for the user.
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	info = (...msg) => this.log(Logger.LogLevels.INFO, msg);
+	info = (...msg) => this.logImpl(Logger.LogLevels.INFO, msg);
 	/**
 	 * Log a message that indicates a successful operation to the user.
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	success = (...msg) => this.log(Logger.LogLevels.SUCCESS, msg);
+	success = (...msg) => this.logImpl(Logger.LogLevels.SUCCESS, msg);
 	/**
 	 * Log a message that indicates a warning to the user.
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	warn = (...msg) => this.log(Logger.LogLevels.WARN, msg);
+	warn = (...msg) => this.logImpl(Logger.LogLevels.WARN, msg);
 	/**
 	 * Log a message that indicates an error to the user.
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	error = (...msg) => this.log(Logger.LogLevels.ERROR, msg);
+	error = (...msg) => this.logImpl(Logger.LogLevels.ERROR, msg);
 	/**
 	 * Log a message that indicates a critical error to the user.
 	 * @param  {...any} msg 
 	 * @returns void
 	 */
-	critical = (...msg) => this.log(Logger.LogLevels.CRITICAL, msg);	
+	critical = (...msg) => this.logImpl(Logger.LogLevels.CRITICAL, msg);
+
+	log = (...msg) => this.logImpl(1000, msg);
 }
 
 /****************************************************************************************

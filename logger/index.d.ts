@@ -51,7 +51,7 @@ export class Logger {
 
 	constructor(level: number, writer: Writer);
 
-	log(level: number, ...message: any[]): void;
+	log(...message: any[]): void;
 	debug(...message: any[]): void;
 	info(...message: any[]): void;
 	success(...message: any[]): void;
