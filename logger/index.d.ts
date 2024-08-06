@@ -61,7 +61,7 @@ export class Logger {
 }
 
 type Config = {
-	level?: { level: number, name: string };
+	level?: { value: number, name: string };
 	color?: [[number, number, number], [number, number, number]];
 	writer?: Writer;
 }
