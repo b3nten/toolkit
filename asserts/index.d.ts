@@ -32,7 +32,7 @@ export function isFunction(value: any): value is Function;
 
 export function isObject(value: any): value is object;
 
-export function hasKeys(value: any, keys: Array<string | symbol>): value is { [key in string | symbol]: any };
+export function hasKeys<K extends string | symbol>(value: any, keys: K[]): value is { readonly [Key in K]: unknown };
 
 export function isArray(value: any): value is any[];
 
