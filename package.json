@@ -39,9 +39,14 @@
     },
     "./types": {
       "types": "./types/index.d.ts"
+    },
+    "./asserts": {
+      "import": "./asserts/index.js",
+      "types": "./asserts/index.d.ts"
     }
   },
   "devDependencies": {
+    "typescript": "^5.5.4",
     "@types/node": "^20.14.11"
   }
 }
