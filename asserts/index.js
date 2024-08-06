@@ -1,14 +1,16 @@
 ﻿export function ASSERT(condition, message) {
   if (!condition) {
 	if(typeof message === 'string') {
-		throw new Error(message);
+		ASSERT.throwOnFailure && throw new Error(message);
 	} else if (typeof message === 'function') {
 		message()
 	} else if (message instanceof Error) {
-		throw message;
+		ASSERT.throwOnFailure && throw message;
 	}
   }
 }
+
+ASSERT.throwOnFailure = true;
 
 ASSERT.isBoolean = isBoolean, ASSERT.isTrue = isTrue, ASSERT.isFalse = isFalse,
 	ASSERT.isTruthy = isTruthy, ASSERT.isFalsy = isFalsy, ASSERT.isNull = isNull,

@@ -1,5 +1,7 @@
 ﻿export function ASSERT(condition: any, message?: string | Error | Function): asserts condition;
 
+ASSERT.throwOnFailure = true;
+
 ASSERT.isBoolean = isBoolean, ASSERT.isTrue = isTrue, ASSERT.isFalse = isFalse,
 	ASSERT.isTruthy = isTruthy, ASSERT.isFalsy = isFalsy, ASSERT.isNull = isNull,
 	ASSERT.isUndefined = isUndefined, ASSERT.isNullish = isNullish, ASSERT.isString = isString,
