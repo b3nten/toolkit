@@ -43,3 +43,25 @@ export function isError(value: any): value is Error;
 export function isRegExp(value: any): value is RegExp;
 
 export function isPromise(value: any): value is Promise<any>;
+
+export function isSafari(): boolean;
+
+export function isFirefox(): boolean;
+
+export function isChrome(): boolean;
+
+export function isWindows(): boolean;
+
+export function isMacOS(): boolean;
+
+export function isLinux(): boolean;
+
+export function isIOS(): boolean;
+
+export function isAndroid(): boolean;
+
+export function isBrowser(): boolean;
+
+export function isNode(): boolean;
+
+export function isDev(): boolean;
