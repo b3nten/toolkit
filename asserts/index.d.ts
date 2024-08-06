@@ -1,5 +1,18 @@
 ﻿export function ASSERT(condition: any, message?: string | Error | Function): asserts condition;
 
+ASSERT.isBoolean = isBoolean, ASSERT.isTrue = isTrue, ASSERT.isFalse = isFalse,
+	ASSERT.isTruthy = isTruthy, ASSERT.isFalsy = isFalsy, ASSERT.isNull = isNull,
+	ASSERT.isUndefined = isUndefined, ASSERT.isNullish = isNullish, ASSERT.isString = isString,
+	ASSERT.isNumber = isNumber, ASSERT.isInteger = isInteger, ASSERT.isFloat = isFloat,
+	ASSERT.isBigInt = isBigInt, ASSERT.isSymbol = isSymbol, ASSERT.isFunction = isFunction,
+	ASSERT.isObject = isObject, ASSERT.hasKeys = hasKeys, ASSERT.isArray = isArray,
+	ASSERT.isDate = isDate, ASSERT.isError = isError, ASSERT.isRegExp = isRegExp,
+	ASSERT.isPromise = isPromise, ASSERT.isSafari = isSafari, ASSERT.isFirefox = isFirefox,
+	ASSERT.isChrome = isChrome, ASSERT.isWindows = isWindows, ASSERT.isMac = isMac,
+	ASSERT.isLinux = isLinux, ASSERT.isIOS = isIOS, ASSERT.isAndroid = isAndroid,
+	ASSERT.isMobile = isMobile, ASSERT.isBrowser = isBrowser, ASSERT.isNode = isNode,
+	ASSERT.isDev = isDev;
+
 export function isBoolean(value: any): value is boolean;
 
 export function isTruthy<T>(value: T): value is NonNullable<T>;
