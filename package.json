@@ -11,7 +11,8 @@
   "license": "MIT",
   "exports": {
     "./logger": {
-      "import": "./logger/mod.js"
+      "import": "./logger/index.js",
+        "types": "./logger/index.d.ts"
     },
     "./queue": {
       "import": "./collections/queue.js"
