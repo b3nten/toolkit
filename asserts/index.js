@@ -8,6 +8,10 @@
 		message()
 	} else if (message instanceof Error) {
 		if(ASSERT.throwOnFailure) throw message;
+	} else {
+		if(ASSERT.throwOnFailure) {
+			throw new Error('Assertion failed');
+		}
 	}
   }
 }
