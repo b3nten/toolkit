@@ -1,7 +1,9 @@
 ﻿export function ASSERT(condition, message) {
   if (!condition) {
 	if(typeof message === 'string') {
-		ASSERT.throwOnFailure && throw new Error(message);
+		if(ASSERT.throwOnFailure) {
+			throw new Error(message);
+		}
 	} else if (typeof message === 'function') {
 		message()
 	} else if (message instanceof Error) {
