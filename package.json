@@ -4,7 +4,7 @@
     "access": "public"
   },
   "type": "module",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "Library of tools for JavaScript development.",
   "keywords": [],
   "author": "Benton Boychuk-Chorney",
@@ -44,6 +44,10 @@
     "./asserts": {
       "import": "./asserts/index.js",
       "types": "./asserts/index.d.ts"
+    },
+    "./run": {
+      "import": "./run/index.js",
+      "types": "./run/index.d.ts"
     }
   },
   "devDependencies": {
