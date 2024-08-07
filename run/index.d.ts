@@ -1,4 +1,4 @@
-export declare function run<T = () => void>(
+export declare function run<T>(
 	fn: () => T
 ): T extends Promise<any> ? (Promise<Error | Awaited<T>>) : (Error | T)
 
@@ -9,10 +9,10 @@ export type Result<T> = {
 } | {
 	success: true,
 	error: undefined,
-	value: T
+	value: T,
 }
 
-export declare function result<T = () => void>(
+export declare function result<T>(
 	fn: () => T
 ): T extends Promise<any> ? (Promise<Result<Awaited<T>>>) : Result<T>
 

@@ -1,27 +1,19 @@
 /**
  * Immediately runs the provided function, catching and returning all uncaught exceptions.
  */
-export function run(fn)
-{
-	try
-	{
+export function run(fn){
+	try {
 		const value = fn()
-		if(value instanceof Promise)
-		{
+		if(value instanceof Promise){
 			return new Promise(
-				(res) =>
-				{
+				(res) => {
 					value.then(val => res(val)).catch(err => res(toError(err)))
 				}
 			);
-		}
-		else
-		{
+		} else {
 			return value;
 		}
-	}
-	catch (e)
-	{
+	} catch(e) {
 		return toError(e);
 	}
 }
@@ -29,31 +21,23 @@ export function run(fn)
 const RESULT_BRAND = Symbol("RESULT_BRAND");
 
 /**
- * Returns a Result type from the provided function.
+ * Immediately runs the provided function,
+ * returning a result object that includes the success status,
+ * the value returned by the function, and any error that was thrown.
  */
-export function result(fn)
-{
-	try
-	{
+export function result(fn){
+	try {
 		const value = fn()
-		if(value instanceof Promise)
-		{
-			return new Promise(
-				(res) =>
-				{
-					value
-						.then(value => res({ success: true, value, error: undefined, RESULT_BRAND: true }))
-						.catch(err => res({ success: false, error: toError(err), value: undefined, RESULT_BRAND: true }))
-				}
-			);
-		}
-		else
-		{
+		if(value instanceof Promise){
+			return new Promise((res) => {
+				value
+					.then(value => res({ success: true, value, error: undefined, RESULT_BRAND: true }))
+					.catch(err => res({ success: false, error: toError(err), value: undefined, RESULT_BRAND: true }))
+			});
+		} else {
 			return { success: true, error: undefined, value: value, RESULT_BRAND: true }
 		}
-	}
-	catch (e)
-	{
+	} catch(e) {
 		return { success: false, error: toError(e), value: undefined, RESULT_BRAND: true }
 	}
 }
@@ -63,15 +47,7 @@ export function isResult(input){
 }
 
 const toError = (err) => {
-	if (err instanceof Error)
-	{
-		return err
-	}
-
-	if(typeof err === 'string')
-	{
-		return new Error(err)
-	}
-
+	if (err instanceof Error) { return err }
+	if(typeof err === 'string') { return new Error(err) }
 	return new Error(String(err))
 }
