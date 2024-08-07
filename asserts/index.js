@@ -1,57 +1,52 @@
-﻿export function ASSERT(condition, message) {
-  if (!condition) {
-	if(typeof message === 'string') {
-		if(ASSERT.throwOnFailure) {
-			throw new Error(message);
-		}
-	} else if (typeof message === 'function') {
-		message()
-	} else if (message instanceof Error) {
-		if(ASSERT.throwOnFailure) throw message;
-	} else {
-		if(ASSERT.throwOnFailure) {
-			throw new Error('Assertion failed');
-		}
+﻿export class AssertionError extends Error {
+	constructor(message) {
+		super(message);
+		this.name = 'AssertionError';
+		this.stack = this.stack.split('\n').filter((line) => !line.includes('at ASSERT')).join('\n');
 	}
-  }
 }
 
-ASSERT.throwOnFailure = true;
+export class DebugAssertionError extends AssertionError {
+	constructor(message) {
+		super(message);
+		this.name = 'DebugAssertionError';
+		this.stack = this.stack.split('\n').filter((line) => !line.includes('at DEBUG_ASSERT')).join('\n');
+	}
+}
 
-ASSERT.isBoolean = isBoolean;
-ASSERT.isTrue = isTrue;
-ASSERT.isFalse = isFalse;
-ASSERT.isTruthy = isTruthy;
-ASSERT.isFalsy = isFalsy;
-ASSERT.isNull = isNull;
-ASSERT.isUndefined = isUndefined;
-ASSERT.isNullish = isNullish;
-ASSERT.isString = isString;
-ASSERT.isNumber = isNumber;
-ASSERT.isInteger = isInteger;
-ASSERT.isFloat = isFloat;
-ASSERT.isBigInt = isBigInt;
-ASSERT.isSymbol = isSymbol;
-ASSERT.isFunction = isFunction;
-ASSERT.isObject = isObject;
-ASSERT.hasKeys = hasKeys;
-ASSERT.isArray = isArray;
-ASSERT.isDate = isDate;
-ASSERT.isError = isError;
-ASSERT.isRegExp = isRegExp;
-ASSERT.isPromise = isPromise;
-ASSERT.isSafari = isSafari;
-ASSERT.isFirefox = isFirefox;
-ASSERT.isChrome = isChrome;
-ASSERT.isWindows = isWindows;
-ASSERT.isMac = isMac;
-ASSERT.isLinux = isLinux;
-ASSERT.isIOS = isIOS;
-ASSERT.isAndroid = isAndroid;
-ASSERT.isMobile = isMobile;
-ASSERT.isBrowser = isBrowser;
-ASSERT.isNode = isNode;
-ASSERT.isDev = isDev;
+export function ASSERT(condition, message) {
+	if(!ASSERT.enabled) return;
+	if (!condition) {
+		if(typeof message === 'string') {
+			throw new AssertionError(message);
+		} else if (typeof message === 'function') {
+			message()
+		} else if (message instanceof Error) {
+			throw message;
+		} else {
+			throw new AssertionError('Assertion failed');
+		}
+	}
+}
+
+ASSERT.enabled = true;
+
+export function DEBUG_ASSERT(condition, message) {
+	if(!DEBUG_ASSERT.enabled) return;
+	if (!condition) {
+		if(typeof message === 'string') {
+			throw new DebugAssertionError(message);
+		} else if (typeof message === 'function') {
+			message()
+		} else if (message instanceof Error) {
+			throw message;
+		} else {
+			throw new DebugAssertionError('Assertion failed');
+		}
+	}
+}
+
+DEBUG_ASSERT.enabled = true;
 
 export function isBoolean(value) { return typeof value === 'boolean'; }
 
@@ -120,3 +115,16 @@ export function isBrowser() { return typeof window !== 'undefined' && typeof doc
 export function isNode() { return typeof process !== 'undefined' && process.versions != null && process.versions.node != null; }
 
 export function isDev() { return process.env.NODE_ENV === 'development'; }
+
+const checks = [
+	isBoolean, isTrue, isFalse, isTruthy, isFalsy, isNull, isUndefined, isNullish,
+	isString, isNumber, isInteger, isFloat, isBigInt, isSymbol, isFunction, isObject,
+	hasKeys, isArray, isDate, isError, isRegExp, isPromise,
+	isSafari, isFirefox, isChrome, isWindows, isMac, isLinux, isIOS, isAndroid, isMobile,
+	isBrowser, isNode, isDev
+]
+
+for(const check of checks){
+	ASSERT[check.name] = (value, message) => ASSERT(check(value), message);
+	DEBUG_ASSERT[check.name] = (value, message) => DEBUG_ASSERT(check(value), message);
+}
